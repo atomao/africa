@@ -57,9 +57,15 @@ class SegmentationDataModule(LightningDataModule):
 
         # store as list[Path]
         self.train_indices = [Path(p) for p in train_indices]
-        self.val_indices = [Path(p) for p in val_indices] if val_indices is not None else None
-        self.test_indices = [Path(p) for p in test_indices] if test_indices is not None else None
-        self.pred_indices = [Path(p) for p in pred_indices] if pred_indices is not None else None
+        self.val_indices = (
+            [Path(p) for p in val_indices] if val_indices is not None else None
+        )
+        self.test_indices = (
+            [Path(p) for p in test_indices] if test_indices is not None else None
+        )
+        self.pred_indices = (
+            [Path(p) for p in pred_indices] if pred_indices is not None else None
+        )
 
         self.root_dir = Path(root_dir)
 
@@ -72,9 +78,7 @@ class SegmentationDataModule(LightningDataModule):
         self.num_workers = num_workers
         self.pin_memory = pin_memory
         self.persistent_workers = (
-            persistent_workers
-            if persistent_workers is not None
-            else (num_workers > 0)
+            persistent_workers if persistent_workers is not None else (num_workers > 0)
         )
         self.shuffle_train = shuffle_train
         self.drop_last = drop_last
@@ -145,7 +149,9 @@ class SegmentationDataModule(LightningDataModule):
 
     def train_dataloader(self) -> DataLoader:
         if self.train_dataset is None:
-            raise RuntimeError("Train dataset is not initialized. Call `setup('fit')` first.")
+            raise RuntimeError(
+                "Train dataset is not initialized. Call `setup('fit')` first."
+            )
         return DataLoader(
             self.train_dataset,
             batch_size=self.batch_size,

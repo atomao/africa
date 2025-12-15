@@ -12,6 +12,8 @@ from lightning.pytorch import LightningDataModule
 
 
 simple_augment = A.Compose([A.ToTensorV2()])
+
+
 class SegmentationDataset(Dataset):
     """
     Baseline PyTorch Dataset for binary segmentation with Albumentations support.
@@ -37,7 +39,7 @@ class SegmentationDataset(Dataset):
 
     def __init__(
         self,
-        dataset_filepath: str | Path ,
+        dataset_filepath: str | Path,
         root_dir: str | Path | None = None,
         augment: AlbumentationsTransform = simple_augment,
     ) -> None:

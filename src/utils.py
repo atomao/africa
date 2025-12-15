@@ -1,13 +1,14 @@
 import numpy as np
 import torch
 
+
 def deaugment_image(tensor_img, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]):
     """
     Reverse Albumentations Normalize + ToTensorV2.
-    
+
     Parameters
     ----------
-    tensor_img : torch.Tensor 
+    tensor_img : torch.Tensor
         Tensor of shape (C, H, W) and dtype float32, normalized.
     mean : list of float
     std : list of float

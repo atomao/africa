@@ -2,9 +2,10 @@ from lightning.pytorch.callbacks import Callback
 import torch
 from pathlib import Path
 
+
 class SaveStateDictCallback(Callback):
     """
-    Saves LightningModule.model.model.state_dict() 
+    Saves LightningModule.model.model.state_dict()
     after every epoch into a given directory.
     """
 
@@ -20,13 +21,13 @@ class SaveStateDictCallback(Callback):
             smp_model = pl_module.model.head
         else:
             try:
-                smp_model = pl_module.model   # your SMP model
+                smp_model = pl_module.model  # your SMP model
             except AttributeError:
                 raise AttributeError(
                     "Expected LightningModule to have pl_module.model.model "
                     "but it does not exist."
                 )
-        
+
         epoch = trainer.current_epoch
         save_path = self.save_dir / f"{self.prefix}_{epoch:03d}.pth"
 
